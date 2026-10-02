@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | BloodBridge</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🩸 BloodBridge
+        </div>
+
+        <button id="logoutBtn" class="logout-btn">
+            Logout
+        </button>
+
+    </nav>
+
+
+    <!-- DASHBOARD -->
+    <main class="dashboard">
+
+        <!-- WELCOME -->
+        <section class="welcome">
+
+            <p class="small-title">
+                BLOODBRIDGE DASHBOARD
+            </p>
+
+            <h1>
+                Welcome, <span id="userName">User</span> 👋
+            </h1>
+
+            <p>
+                Find blood, request blood and get quick help when you need it.
+            </p>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+        <section class="actions">
+
+            <!-- FIND BLOOD -->
+            <div class="action-card">
+
+                <h2>
+                    🔎 Find Blood
+                </h2>
+
+                <p>
+                    Search for available blood donors based on
+                    blood group and city.
+                </p>
+
+                <button onclick="window.location.href='find-blood.html'">
+                    Find Blood
+                </button>
+
+            </div>
+
+
+            <!-- REQUEST BLOOD -->
+            <div class="action-card">
+
+                <h2>
+                    🩸 Request Blood
+                </h2>
+
+                <p>
+                    Create a blood request for a patient who
+                    needs blood urgently.
+                </p>
+
+                <button onclick="window.location.href='request-blood.html'">
+                    Request Blood
+                </button>
+
+            </div>
+
+
+            <!-- MY REQUESTS -->
+            <div class="action-card">
+
+                <h2>
+                    📋 My Requests
+                </h2>
+
+                <p>
+                    View and track the blood requests that
+                    you have created.
+                </p>
+
+                <button onclick="window.location.href='my-requests.html'">
+                    My Requests
+                </button>
+
+            </div>
+
+
+            <!-- AI ASSISTANT -->
+            <div class="action-card">
+
+                <h2>
+                    🤖 AI Blood Assistant
+                </h2>
+
+                <p>
+                    Get quick assistance for finding blood,
+                    donors and blood donation information.
+                </p>
+
+                <button onclick="window.location.href='ai-assistant.html'">
+                    Open AI Assistant
+                </button>
+
+            </div>
+
+
+            <!-- PROFILE -->
+            <div class="action-card">
+
+                <h2>
+                    👤 My Profile
+                </h2>
+
+                <p>
+                    View and manage your BloodBridge account
+                    information.
+                </p>
+
+                <button onclick="window.location.href='donor-profile.html'">
+                    View Profile
+                </button>
+
+            </div>
+
+
+            <!-- DONATION HISTORY -->
+            <div class="action-card">
+
+                <h2>
+                    ❤️ Donation History
+                </h2>
+
+                <p>
+                    View your previous blood donation
+                    records.
+                </p>
+
+                <button onclick="window.location.href='donation-history.html'">
+                    View History
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        // Load logged-in user
+        async function loadUser() {
+
+            try {
+
+                const response = await fetch("/api/user", {
+                    credentials: "same-origin"
+                });
+
+                const data = await response.json();
+
+                if (!data.success) {
+
+                    window.location.href = "login.html";
+                    return;
+
+                }
+
+                document.getElementById("userName").textContent =
+                    data.user.name || "User";
+
+            } catch (error) {
+
+                console.error(error);
+
+                window.location.href = "login.html";
+
+            }
+        }
+
+
+        // Logout
+        document
+            .getElementById("logoutBtn")
+            .addEventListener("click", async function () {
+
+                try {
+
+                    const response = await fetch("/api/logout", {
+                        method: "POST",
+                        credentials: "same-origin"
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+
+                        window.location.href = "login.html";
+
+                    } else {
+
+                        alert("Logout failed.");
+
+                    }
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    alert("Logout failed. Please try again.");
+
+                }
+
+            });
+
+
+        // Start
+        loadUser();
+
+    </script>
+
+</body>
+</html>

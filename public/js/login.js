@@ -16,6 +16,7 @@ loginForm.addEventListener("submit", async function (event) {
             headers: {
                 "Content-Type": "application/json"
             },
+            credentials: "same-origin",
             body: JSON.stringify({
                 email: email,
                 password: password
@@ -25,30 +26,38 @@ loginForm.addEventListener("submit", async function (event) {
         const data = await response.json();
 
         if (data.success) {
+
             message.textContent = "Login successful!";
             message.style.color = "green";
 
             setTimeout(() => {
 
-                if (data.user.role === "donor") {
-                    window.location.href = "donor.html";
+                if (data.user.role === "admin") {
 
-                } else if (data.user.role === "admin") {
                     window.location.href = "admin.html";
 
+                } else if (data.user.role === "donor") {
+
+                    window.location.href = "donor.html";
+
                 } else {
-                    window.location.href = "find-blood.html";
+
+                    window.location.href = "dashboard.html";
+
                 }
 
-            }, 1000);
+            }, 500);
 
         } else {
+
             message.textContent =
                 data.message || "Invalid email or password.";
+
             message.style.color = "red";
         }
 
     } catch (error) {
+
         console.error(error);
 
         message.textContent =
