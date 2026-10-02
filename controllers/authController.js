@@ -1,7 +1,9 @@
 const db = require("../config/database");
 const bcrypt = require("bcryptjs");
 
-// Register
+// ===============================
+// REGISTER
+// ===============================
 exports.register = async (req, res) => {
     try {
         const { name, email, phone, password, role } = req.body;
@@ -16,8 +18,10 @@ exports.register = async (req, res) => {
         const checkUser = "SELECT id FROM users WHERE email = ?";
 
         db.query(checkUser, [email], async (err, results) => {
+
             if (err) {
-                console.log(err);
+                console.log("Register database error:", err);
+
                 return res.status(500).json({
                     success: false,
                     message: "Database error"
@@ -49,8 +53,9 @@ exports.register = async (req, res) => {
                     role || "seeker"
                 ],
                 (err, result) => {
+
                     if (err) {
-                        console.log(err);
+                        console.log("Registration insert error:", err);
 
                         return res.status(500).json({
                             success: false,
@@ -58,17 +63,19 @@ exports.register = async (req, res) => {
                         });
                     }
 
-                    res.status(201).json({
+                    return res.status(201).json({
                         success: true,
                         message: "Registration successful"
                     });
                 }
             );
         });
-    } catch (error) {
-        console.log(error);
 
-        res.status(500).json({
+    } catch (error) {
+
+        console.log("Register server error:", error);
+
+        return res.status(500).json({
             success: false,
             message: "Server error"
         });
@@ -76,12 +83,17 @@ exports.register = async (req, res) => {
 };
 
 
-// Login
+// ===============================
+// LOGIN
+// ===============================
 exports.login = async (req, res) => {
+
     try {
+
         const { email, password } = req.body;
 
         if (!email || !password) {
+
             return res.status(400).json({
                 success: false,
                 message: "Email and password are required"
@@ -91,8 +103,10 @@ exports.login = async (req, res) => {
         const sql = "SELECT * FROM users WHERE email = ?";
 
         db.query(sql, [email], async (err, results) => {
+
             if (err) {
-                console.log(err);
+
+                console.log("Login database error:", err);
 
                 return res.status(500).json({
                     success: false,
@@ -101,6 +115,7 @@ exports.login = async (req, res) => {
             }
 
             if (results.length === 0) {
+
                 return res.status(401).json({
                     success: false,
                     message: "Invalid email or password"
@@ -115,12 +130,14 @@ exports.login = async (req, res) => {
             );
 
             if (!passwordMatch) {
+
                 return res.status(401).json({
                     success: false,
                     message: "Invalid email or password"
                 });
             }
 
+            // Create session
             req.session.user = {
                 id: user.id,
                 name: user.name,
@@ -128,16 +145,40 @@ exports.login = async (req, res) => {
                 role: user.role
             };
 
-            res.json({
-                success: true,
-                message: "Login successful",
-                user: req.session.user
+            // Make sure session is saved before sending response
+            req.session.save((sessionError) => {
+
+                if (sessionError) {
+
+                    console.log(
+                        "Session save error:",
+                        sessionError
+                    );
+
+                    return res.status(500).json({
+                        success: false,
+                        message: "Session could not be saved"
+                    });
+                }
+
+                console.log(
+                    "User logged in:",
+                    req.session.user.email
+                );
+
+                return res.json({
+                    success: true,
+                    message: "Login successful",
+                    user: req.session.user
+                });
             });
         });
-    } catch (error) {
-        console.log(error);
 
-        res.status(500).json({
+    } catch (error) {
+
+        console.log("Login server error:", error);
+
+        return res.status(500).json({
             success: false,
             message: "Server error"
         });
@@ -145,17 +186,26 @@ exports.login = async (req, res) => {
 };
 
 
-// Logout
+// ===============================
+// LOGOUT
+// ===============================
 exports.logout = (req, res) => {
+
     req.session.destroy((err) => {
+
         if (err) {
+
+            console.log("Logout error:", err);
+
             return res.status(500).json({
                 success: false,
                 message: "Logout failed"
             });
         }
 
-        res.json({
+        res.clearCookie("connect.sid");
+
+        return res.json({
             success: true,
             message: "Logged out successfully"
         });
