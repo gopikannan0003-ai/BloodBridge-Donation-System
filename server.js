@@ -18,14 +18,17 @@ const donationRoutes = require("./routes/donation");
 const bloodAssistantRoutes = require("./routes/bloodAssistant");
 
 const app = express();
-const PORT = 3000;
+
+// Railway provides PORT automatically
+const PORT = process.env.PORT || 3000;
 
 // ==========================================
 // MIDDLEWARE
 // ==========================================
 
+// Allow requests from deployed frontend / same server
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: true,
     credentials: true
 }));
 
@@ -43,7 +46,7 @@ app.use(
 
 app.use(
     session({
-        secret: "bloodbridge_secret_key",
+        secret: process.env.SESSION_SECRET || "bloodbridge_secret_key",
         resave: false,
         saveUninitialized: false,
 
@@ -51,7 +54,7 @@ app.use(
             maxAge: 24 * 60 * 60 * 1000,
             httpOnly: true,
             sameSite: "lax",
-            secure: false
+            secure: process.env.NODE_ENV === "production"
         }
     })
 );
@@ -178,11 +181,10 @@ app.use((req, res) => {
 // START SERVER
 // ==========================================
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
 
     console.log(
-        `BloodBridge server running at http://localhost:${PORT}`
+        `BloodBridge server running on port ${PORT}`
     );
 
 });
-
