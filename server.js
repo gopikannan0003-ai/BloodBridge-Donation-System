@@ -13,11 +13,15 @@ const donorRoutes = require("./routes/donor");
 const requestRoutes = require("./routes/request");
 const adminRoutes = require("./routes/admin");
 const donationRoutes = require("./routes/donation");
-
-// AI BLOOD ASSISTANT ROUTE
 const bloodAssistantRoutes = require("./routes/bloodAssistant");
 
 const app = express();
+
+// ==========================================
+// RAILWAY / PROXY SETTINGS
+// ==========================================
+
+app.set("trust proxy", 1);
 
 // Railway provides PORT automatically
 const PORT = process.env.PORT || 3000;
@@ -26,11 +30,12 @@ const PORT = process.env.PORT || 3000;
 // MIDDLEWARE
 // ==========================================
 
-// Allow requests from deployed frontend / same server
-app.use(cors({
-    origin: true,
-    credentials: true
-}));
+app.use(
+    cors({
+        origin: true,
+        credentials: true
+    })
+);
 
 app.use(express.json());
 
@@ -46,14 +51,21 @@ app.use(
 
 app.use(
     session({
-        secret: process.env.SESSION_SECRET || "bloodbridge_secret_key",
+        secret:
+            process.env.SESSION_SECRET ||
+            "bloodbridge_secret_key",
+
         resave: false,
+
         saveUninitialized: false,
 
         cookie: {
             maxAge: 24 * 60 * 60 * 1000,
+
             httpOnly: true,
+
             sameSite: "lax",
+
             secure: process.env.NODE_ENV === "production"
         }
     })
@@ -99,7 +111,10 @@ app.use("/api/donation", donationRoutes);
 // AI BLOOD ASSISTANT ROUTES
 // ==========================================
 
-app.use("/api/blood-assistant", bloodAssistantRoutes);
+app.use(
+    "/api/blood-assistant",
+    bloodAssistantRoutes
+);
 
 // ==========================================
 // TEST API
@@ -146,6 +161,8 @@ app.post("/api/logout", (req, res) => {
 
         if (err) {
 
+            console.log("Logout error:", err);
+
             return res.status(500).json({
                 success: false,
                 message: "Logout failed"
@@ -153,7 +170,11 @@ app.post("/api/logout", (req, res) => {
 
         }
 
-        res.clearCookie("connect.sid");
+        res.clearCookie("connect.sid", {
+            httpOnly: true,
+            sameSite: "lax",
+            secure: process.env.NODE_ENV === "production"
+        });
 
         res.json({
             success: true,
