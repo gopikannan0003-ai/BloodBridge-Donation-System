@@ -1,0 +1,495 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f8fc;
+    color: #222;
+}
+
+
+/* ==============================
+   NAVBAR
+============================== */
+
+.navbar {
+    min-height: 70px;
+    background: #b91c1c;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.nav-links button {
+    border: none;
+    background: white;
+    color: #b91c1c;
+
+    padding: 9px 18px;
+    border-radius: 8px;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-links button:hover {
+    background: #fee2e2;
+}
+
+
+/* ==============================
+   MAIN CONTAINER
+============================== */
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+
+/* ==============================
+   HERO
+============================== */
+
+.hero {
+    background: linear-gradient(
+        135deg,
+        #b91c1c,
+        #ef4444
+    );
+
+    color: white;
+
+    padding: 40px;
+    border-radius: 20px;
+
+    margin-bottom: 30px;
+}
+
+.small-title {
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.hero h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 16px;
+}
+
+
+/* ==============================
+   SEARCH CARD
+============================== */
+
+.search-card {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.07);
+
+    margin-bottom: 35px;
+}
+
+.search-card h2 {
+    margin-bottom: 25px;
+}
+
+
+/* SEARCH FORM */
+
+#searchForm {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr auto;
+
+    gap: 18px;
+
+    align-items: end;
+}
+
+
+/* FORM GROUP */
+
+.form-group label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #b91c1c;
+}
+
+
+/* SEARCH BUTTON */
+
+#searchForm button {
+    border: none;
+
+    background: #b91c1c;
+
+    color: white;
+
+    padding: 13px 22px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#searchForm button:hover {
+    background: #991b1b;
+}
+
+
+/* ==============================
+   RESULTS
+============================== */
+
+.results-section h2 {
+    margin-bottom: 20px;
+}
+
+#results {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+/* ==============================
+   DONOR CARD
+============================== */
+
+.donor-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.07);
+
+    transition: 0.2s;
+}
+
+.donor-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.10);
+}
+
+
+/* DONOR ICON */
+
+.donor-icon {
+    font-size: 35px;
+
+    margin-bottom: 12px;
+}
+
+
+/* DONOR NAME */
+
+.donor-card h3 {
+    margin-bottom: 8px;
+
+    font-size: 21px;
+}
+
+
+/* DONOR DETAILS */
+
+.donor-card p {
+    color: #666;
+
+    margin: 7px 0;
+
+    font-size: 14px;
+}
+
+
+/* ==============================
+   BLOOD BADGE
+============================== */
+
+.blood-badge {
+    display: inline-block;
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+
+/* ==============================
+   CONTACT BUTTON
+============================== */
+
+.contact-btn {
+    width: 100%;
+
+    margin-top: 15px;
+
+    border: none;
+
+    background: #16a34a;
+
+    color: white;
+
+    padding: 11px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.contact-btn:hover {
+    background: #15803d;
+}
+
+
+/* ==============================
+   SEND BLOOD REQUEST BUTTON
+============================== */
+
+.request-btn {
+    width: 100%;
+
+    margin-top: 10px;
+
+    border: none;
+
+    background: #b91c1c;
+
+    color: white;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.request-btn:hover {
+    background: #991b1b;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==============================
+   EMPTY MESSAGE
+============================== */
+
+.empty-message {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    color: #666;
+
+    text-align: center;
+
+    grid-column: 1 / -1;
+}
+
+.empty-message h3 {
+    color: #333;
+
+    margin-bottom: 8px;
+}
+
+.empty-message p {
+    margin-top: 8px;
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 15px 5%;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 12px;
+    }
+
+    .container {
+        width: 92%;
+
+        margin: 25px auto;
+    }
+
+    .hero {
+        padding: 28px 22px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        line-height: 1.5;
+    }
+
+    #searchForm {
+        grid-template-columns: 1fr;
+    }
+
+    #searchForm button {
+        width: 100%;
+    }
+
+    #results {
+        grid-template-columns: 1fr;
+    }
+
+    .donor-card {
+        padding: 22px;
+    }
+}
+
+
+/* ==============================
+   SMALL MOBILE
+============================== */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 14px 4%;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .nav-links button {
+        padding: 8px 13px;
+    }
+
+    .hero {
+        padding: 25px 18px;
+
+        border-radius: 15px;
+    }
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+    .search-card {
+        padding: 20px;
+
+        border-radius: 14px;
+    }
+
+    .donor-card {
+        padding: 20px;
+
+        border-radius: 14px;
+    }
+}

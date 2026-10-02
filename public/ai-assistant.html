@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AI Blood Assistant | BloodBridge</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f8fc;
+            color: #222;
+        }
+
+        .navbar {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #d62828;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 850px;
+            margin: 45px auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .chat-box {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .messages {
+            height: 380px;
+            overflow-y: auto;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            max-width: 82%;
+            padding: 13px 16px;
+            border-radius: 15px;
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .bot {
+            background: #f1f1f1;
+            margin-right: auto;
+        }
+
+        .user {
+            background: #d62828;
+            color: white;
+            margin-left: auto;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        #userInput:focus {
+            border-color: #d62828;
+        }
+
+        #sendBtn,
+        #voiceBtn {
+            border: none;
+            color: white;
+            padding: 0 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #sendBtn {
+            background: #d62828;
+        }
+
+        #voiceBtn {
+            background: #333;
+        }
+
+        #sendBtn:hover {
+            background: #b71c1c;
+        }
+
+        #voiceBtn:hover {
+            background: #111;
+        }
+
+        #voiceBtn.listening {
+            background: #008000;
+        }
+
+        .quick-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .quick-buttons button {
+            border: 1px solid #ddd;
+            background: white;
+            padding: 10px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .quick-buttons button:hover {
+            border-color: #d62828;
+            color: #d62828;
+        }
+
+        .voice-status {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 8px;
+            text-align: center;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .container {
+                margin: 25px auto;
+            }
+
+            .chat-box {
+                padding: 15px;
+            }
+
+            .messages {
+                height: 400px;
+            }
+
+            .message {
+                max-width: 92%;
+            }
+
+            .input-area {
+                flex-direction: column;
+            }
+
+            #sendBtn,
+            #voiceBtn {
+                padding: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🩸 BloodBridge
+        </div>
+
+        <a
+            href="donor.html"
+            class="back-btn"
+        >
+            Dashboard
+        </a>
+
+    </nav>
+
+
+    <main class="container">
+
+
+        <section class="hero">
+
+            <h1>
+                🤖 AI Blood Assistant
+            </h1>
+
+            <p>
+                Get quick guidance about blood donation and blood requests.
+            </p>
+
+        </section>
+
+
+        <section class="chat-box">
+
+
+            <div
+                class="messages"
+                id="messages"
+            >
+
+                <div class="message bot">
+
+                    👋 Hello! I'm the
+                    <b>BloodBridge AI Assistant</b>.
+
+                    <br><br>
+
+                    You can ask me in
+                    <b>English, Tamil or Tanglish</b>.
+
+                    <br><br>
+
+                    Example:
+
+                    <br>
+                    • I need B+ blood
+                    <br>
+                    • Find B+ donor in Trichy
+                    <br>
+                    • எனக்கு O+ blood தேவை
+                    <br>
+                    • B+ donor Trichy-la irukka?
+                    <br>
+                    • How can I donate blood?
+                    <br>
+                    • How do I create a blood request?
+
+                </div>
+
+            </div>
+
+
+            <div class="input-area">
+
+                <input
+                    type="text"
+                    id="userInput"
+                    placeholder="Type in English, Tamil or Tanglish..."
+                >
+
+                <button id="voiceBtn">
+                    🎤
+                </button>
+
+                <button id="sendBtn">
+                    Send
+                </button>
+
+            </div>
+
+
+            <div
+                class="voice-status"
+                id="voiceStatus"
+            >
+                🎤 Listening...
+            </div>
+
+
+            <div class="quick-buttons">
+
+                <button
+                    onclick="quickMessage('I need B+ blood')"
+                >
+                    🩸 Need B+ Blood
+                </button>
+
+
+                <button
+                    onclick="quickMessage('Find B+ donor in Trichy')"
+                >
+                    🔎 Find B+ Donor
+                </button>
+
+
+                <button
+                    onclick="quickMessage('How can I donate blood?')"
+                >
+                    ❤️ Donate Blood
+                </button>
+
+
+                <button
+                    onclick="quickMessage('How do I create a blood request?')"
+                >
+                    📋 Create Request
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script>
+
+
+        const input =
+            document.getElementById("userInput");
+
+
+        const sendBtn =
+            document.getElementById("sendBtn");
+
+
+        const voiceBtn =
+            document.getElementById("voiceBtn");
+
+
+        const messages =
+            document.getElementById("messages");
+
+
+        const voiceStatus =
+            document.getElementById("voiceStatus");
+
+
+        // ==========================================
+        // ADD MESSAGE
+        // ==========================================
+
+        function addMessage(text, type) {
+
+            const message =
+                document.createElement("div");
+
+            message.className =
+                "message " + type;
+
+            message.innerHTML =
+                text;
+
+            messages.appendChild(message);
+
+            messages.scrollTop =
+                messages.scrollHeight;
+        }
+
+
+        // ==========================================
+        // SEND MESSAGE
+        // ==========================================
+
+        async function sendMessage() {
+
+            const text =
+                input.value.trim();
+
+            if (!text) {
+                return;
+            }
+
+
+            addMessage(
+                escapeHtml(text),
+                "user"
+            );
+
+
+            input.value = "";
+
+
+            sendBtn.disabled = true;
+
+            sendBtn.textContent =
+                "Thinking...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/blood-assistant/chat",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            credentials: "include",
+
+                            body: JSON.stringify({
+                                message: text
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (data.success) {
+
+                    addMessage(
+                        data.reply,
+                        "bot"
+                    );
+
+                } else {
+
+                    addMessage(
+                        "⚠️ " +
+                        (data.message ||
+                        "Something went wrong."),
+                        "bot"
+                    );
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "AI Assistant Error:",
+                    error
+                );
+
+
+                addMessage(
+                    "❌ Unable to connect to BloodBridge server.",
+                    "bot"
+                );
+
+            }
+
+
+            sendBtn.disabled = false;
+
+            sendBtn.textContent =
+                "Send";
+        }
+
+
+        // ==========================================
+        // QUICK MESSAGE
+        // ==========================================
+
+        function quickMessage(text) {
+
+            input.value =
+                text;
+
+            sendMessage();
+        }
+
+
+        // ==========================================
+        // ESCAPE USER TEXT
+        // ==========================================
+
+        function escapeHtml(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent =
+                text;
+
+            return div.innerHTML;
+        }
+
+
+        // ==========================================
+        // VOICE INPUT
+        // ==========================================
+
+        let recognition = null;
+
+
+        const SpeechRecognition =
+            window.SpeechRecognition ||
+            window.webkitSpeechRecognition;
+
+
+        if (SpeechRecognition) {
+
+            recognition =
+                new SpeechRecognition();
+
+
+            recognition.continuous =
+                false;
+
+
+            recognition.interimResults =
+                false;
+
+
+            recognition.lang =
+                "en-IN";
+
+
+            recognition.onstart =
+                function() {
+
+                    voiceBtn.classList.add(
+                        "listening"
+                    );
+
+                    voiceStatus.style.display =
+                        "block";
+
+                    voiceStatus.textContent =
+                        "🎤 Listening... Speak now";
+                };
+
+
+            recognition.onresult =
+                function(event) {
+
+                    const transcript =
+                        event.results[0][0].transcript;
+
+                    input.value =
+                        transcript;
+
+                    voiceStatus.textContent =
+                        "✅ Voice captured";
+
+                    setTimeout(
+                        function() {
+                            voiceStatus.style.display =
+                                "none";
+                        },
+                        1000
+                    );
+
+                    sendMessage();
+                };
+
+
+            recognition.onerror =
+                function(event) {
+
+                    console.error(
+                        "Voice error:",
+                        event.error
+                    );
+
+                    voiceStatus.style.display =
+                        "none";
+
+                    voiceBtn.classList.remove(
+                        "listening"
+                    );
+
+                    addMessage(
+                        "🎤 Voice input could not be used. You can type your question instead.",
+                        "bot"
+                    );
+                };
+
+
+            recognition.onend =
+                function() {
+
+                    voiceBtn.classList.remove(
+                        "listening"
+                    );
+
+                    voiceStatus.style.display =
+                        "none";
+                };
+
+
+            voiceBtn.addEventListener(
+                "click",
+                function() {
+
+                    try {
+
+                        recognition.start();
+
+                    } catch (error) {
+
+                        console.log(
+                            "Voice already active."
+                        );
+
+                    }
+
+                }
+            );
+
+        } else {
+
+            voiceBtn.addEventListener(
+                "click",
+                function() {
+
+                    addMessage(
+                        "🎤 Voice input is not supported by this browser. Please type your question.",
+                        "bot"
+                    );
+
+                }
+            );
+        }
+
+
+        // ==========================================
+        // SEND BUTTON
+        // ==========================================
+
+        sendBtn.addEventListener(
+            "click",
+            sendMessage
+        );
+
+
+        // ==========================================
+        // ENTER KEY
+        // ==========================================
+
+        input.addEventListener(
+            "keypress",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    sendMessage();
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

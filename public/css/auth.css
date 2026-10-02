@@ -1,0 +1,223 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+}
+
+/* Main Container */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    padding: 40px 20px;
+}
+
+/* Brand */
+
+.auth-brand {
+    width: 350px;
+    text-align: center;
+}
+
+.brand-icon {
+    width: 110px;
+    height: 110px;
+    margin: auto;
+    border-radius: 50%;
+    background: #d71920;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 55px;
+    box-shadow: 0 15px 35px rgba(215, 25, 32, 0.25);
+}
+
+.auth-brand h1 {
+    margin-top: 25px;
+    font-size: 42px;
+    color: #d71920;
+}
+
+.auth-brand p {
+    margin-top: 10px;
+    color: #666;
+    font-size: 17px;
+}
+
+/* Card */
+
+.auth-card {
+    width: 430px;
+    background: white;
+    padding: 38px;
+    border-radius: 22px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+.auth-card h2 {
+    text-align: center;
+    font-size: 30px;
+    color: #222;
+}
+
+.subtitle {
+    text-align: center;
+    color: #777;
+    margin: 8px 0 28px;
+}
+
+/* Form */
+
+form label {
+    display: block;
+    margin: 15px 0 7px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    outline: none;
+    font-size: 15px;
+    background: #fafafa;
+    transition: 0.3s;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #d71920;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(215, 25, 32, 0.08);
+}
+
+/* Button */
+
+form button {
+    width: 100%;
+    border: none;
+    padding: 15px;
+    margin-top: 25px;
+    border-radius: 9px;
+    background: #d71920;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: #b91218;
+    transform: translateY(-2px);
+}
+
+/* Message */
+
+#message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* Bottom */
+
+.bottom-text {
+    text-align: center;
+    margin-top: 25px;
+    color: #666;
+    font-size: 14px;
+}
+
+.bottom-text a {
+    color: #d71920;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.home-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #555;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.home-link:hover {
+    color: #d71920;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .auth-container {
+        flex-direction: column;
+        gap: 25px;
+        padding: 30px 15px;
+    }
+
+    .auth-brand {
+        width: 100%;
+    }
+
+    .brand-icon {
+        width: 75px;
+        height: 75px;
+        font-size: 38px;
+    }
+
+    .auth-brand h1 {
+        font-size: 32px;
+        margin-top: 12px;
+    }
+
+    .auth-brand p {
+        font-size: 14px;
+    }
+
+    .auth-card {
+        width: 100%;
+        max-width: 430px;
+        padding: 28px 22px;
+    }
+
+    .auth-card h2 {
+        font-size: 26px;
+    }
+}
+
+/* Small Mobile */
+
+@media (max-width: 400px) {
+
+    .auth-container {
+        padding: 20px 12px;
+    }
+
+    .auth-card {
+        padding: 24px 18px;
+        border-radius: 17px;
+    }
+
+    form input,
+    form select {
+        padding: 12px;
+    }
+}
+

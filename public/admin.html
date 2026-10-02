@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | BloodBridge</title>
+
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🩸 BloodBridge
+    </div>
+
+    <div class="nav-links">
+
+        <a href="index.html">Home</a>
+
+        <button id="logoutBtn">
+            Logout
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <p class="small-title">
+            ADMIN PANEL
+        </p>
+
+        <h1>
+            BloodBridge Dashboard
+        </h1>
+
+        <p>
+            Monitor users, donors and blood requests.
+        </p>
+
+    </section>
+
+
+    <!-- ================= STATISTICS ================= -->
+
+    <section class="stats-section">
+
+        <h2>
+            📊 Dashboard Statistics
+        </h2>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div>
+                    <p>Total Users</p>
+                    <h3 id="totalUsers">0</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🩸
+                </div>
+
+                <div>
+                    <p>Total Donors</p>
+                    <h3 id="totalDonors">0</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div>
+                    <p>Pending Requests</p>
+                    <h3 id="pendingRequests">0</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div>
+                    <p>Accepted Requests</p>
+                    <h3 id="acceptedRequests">0</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🎉
+                </div>
+
+                <div>
+                    <p>Completed</p>
+                    <h3 id="completedRequests">0</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ❌
+                </div>
+
+                <div>
+                    <p>Cancelled</p>
+                    <h3 id="cancelledRequests">0</h3>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= QUICK ACTIONS ================= -->
+
+    <section class="actions-section">
+
+        <h2>
+            ⚡ Quick Actions
+        </h2>
+
+        <div class="actions-grid">
+
+            <button onclick="showUsers()">
+                👥 View Users
+            </button>
+
+            <button onclick="showRequests()">
+                🩸 View Blood Requests
+            </button>
+
+            <button onclick="location.reload()">
+                🔄 Refresh Dashboard
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= USERS ================= -->
+
+    <section
+        id="usersSection"
+        class="data-section"
+        style="display:none;"
+    >
+
+        <div class="section-header">
+
+            <h2>
+                👥 All Users
+            </h2>
+
+            <button onclick="hideSections()">
+                ✖ Close
+            </button>
+
+        </div>
+
+        <div id="usersContainer">
+            Loading users...
+        </div>
+
+    </section>
+
+
+    <!-- ================= REQUESTS ================= -->
+
+    <section
+        id="requestsSection"
+        class="data-section"
+        style="display:none;"
+    >
+
+        <div class="section-header">
+
+            <h2>
+                🩸 All Blood Requests
+            </h2>
+
+            <button onclick="hideSections()">
+                ✖ Close
+            </button>
+
+        </div>
+
+        <div id="requestsContainer">
+            Loading requests...
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="js/admin.js"></script>
+
+</body>
+</html>

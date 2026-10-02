@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | BloodBridge</title>
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-brand">
+        <div class="brand-icon">🩸</div>
+        <h1>BloodBridge</h1>
+        <p>Connecting donors. Saving lives.</p>
+    </div>
+
+    <div class="auth-card">
+
+        <h2>Create Account</h2>
+        <p class="subtitle">Join the BloodBridge community</p>
+
+        <form id="registerForm">
+
+            <label>Full Name</label>
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                required
+            >
+
+            <label>Email</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label>Phone Number</label>
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+                maxlength="10"
+                required
+            >
+
+            <label>Account Type</label>
+            <select id="role">
+                <option value="seeker">Blood Seeker</option>
+                <option value="donor">Blood Donor</option>
+            </select>
+
+            <label>Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+                required
+            >
+
+            <label>Confirm Password</label>
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                required
+            >
+
+            <button type="submit">
+                Create Account
+            </button>
+
+            <p id="message"></p>
+
+        </form>
+
+        <div class="bottom-text">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </div>
+
+        <a href="index.html" class="home-link">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</div>
+
+<script src="js/register.js"></script>
+
+</body>
+</html>
+

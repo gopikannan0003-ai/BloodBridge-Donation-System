@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Donor Requests | BloodBridge</title>
+
+    <link rel="stylesheet"
+        href="css/donor-requests.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🩸 BloodBridge
+        </div>
+
+        <div class="nav-links">
+
+            <a href="donor.html">
+                Dashboard
+            </a>
+
+            <a href="donor-profile.html">
+                My Profile
+            </a>
+
+            <a href="find-blood.html">
+                Find Blood
+            </a>
+
+            <button id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="hero">
+
+            <p class="small-title">
+                DONOR REQUESTS
+            </p>
+
+            <h1>
+                Blood Donation Requests
+            </h1>
+
+            <p>
+                View blood requests that need your help.
+            </p>
+
+        </section>
+
+
+        <section class="requests-section">
+
+            <div class="section-header">
+
+                <h2>
+                    🩸 Requests for You
+                </h2>
+
+                <button
+                    class="refresh-btn"
+                    onclick="loadDonorRequests()">
+                    🔄 Refresh
+                </button>
+
+            </div>
+
+
+            <div id="requestsContainer">
+
+                <div class="loading">
+                    Loading blood requests...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/donor-requests.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Donor Dashboard | BloodBridge</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🩸 BloodBridge
+        </div>
+
+        <button id="logoutBtn" class="logout-btn">
+            Logout
+        </button>
+
+    </nav>
+
+
+    <main class="dashboard">
+
+
+        <section class="welcome">
+
+            <p class="small-title">
+                DONOR DASHBOARD
+            </p>
+
+            <h1>
+                Welcome, <span id="userName">Donor</span> 👋
+            </h1>
+
+            <p>
+                Your donation can help save someone's life.
+            </p>
+
+        </section>
+
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🩸
+                </div>
+
+                <h3>
+                    Blood Group
+                </h3>
+
+                <p id="bloodGroup">
+                    Not Added
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ❤️
+                </div>
+
+                <h3>
+                    Donation Status
+                </h3>
+
+                <p class="available">
+                    Available
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📅
+                </div>
+
+                <h3>
+                    Last Donation
+                </h3>
+
+                <p id="lastDonation">
+                    Not Added
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="actions">
+
+
+            <div class="action-card">
+
+                <h2>
+                    🩸 Complete Donor Profile
+                </h2>
+
+                <p>
+                    Add your blood group and basic details so people
+                    can find you when blood is needed.
+                </p>
+
+                <button onclick="openProfile()">
+                    Complete Profile
+                </button>
+
+            </div>
+
+
+            <div class="action-card">
+
+                <h2>
+                    🔎 Blood Requests
+                </h2>
+
+                <p>
+                    View nearby blood requests and help patients
+                    who need your blood group.
+                </p>
+
+                <button onclick="viewRequests()">
+                    View Requests
+                </button>
+
+            </div>
+
+
+            <div class="action-card">
+
+                <h2>
+                    📋 My Donations
+                </h2>
+
+                <p>
+                    Keep track of your blood donation history.
+                </p>
+
+                <button onclick="viewDonations()">
+                    Donation History
+                </button>
+
+            </div>
+
+
+            <!-- AI BLOOD ASSISTANT -->
+
+            <div class="action-card">
+
+                <h2>
+                    🤖 AI Blood Assistant
+                </h2>
+
+                <p>
+                    Get quick help about blood requests,
+                    donors and blood donation.
+                </p>
+
+                <button onclick="openAIAssistant()">
+                    Open AI Assistant
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script src="js/donor.js"></script>
+
+</body>
+</html>
